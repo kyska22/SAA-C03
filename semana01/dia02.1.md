@@ -1,4 +1,4 @@
-##Politica de exemplo
+## Politica de exemplo
 
 O código fornecido é uma política de permissões em formato JSON, usada no **AWS IAM (Identity and Access Management)**. Essa política define permissões específicas para acessar recursos no serviço **Amazon S3** (Simple Storage Service). Vamos detalhar cada parte:
 
@@ -53,4 +53,3 @@ Se você aplicar essa política a um usuário ou função no AWS:
 1. Essa política concede permissões relativamente restritas, pois permite apenas ações de leitura (`GetObject` e `ListBucket`) e não permite ações como upload (`PutObject`) ou exclusão (`DeleteObject`).
 2. É importante garantir que apenas usuários ou funções confiáveis tenham acesso a essa política, especialmente se os dados no bucket forem sensíveis.
 
-Se precisar de mais detalhes ou exemplos, é só perguntar! 😊
