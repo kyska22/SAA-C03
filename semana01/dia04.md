@@ -136,6 +136,31 @@ ASG escala automáticamente el número de instancias EC2 basado en demanda.
 - Durante Black Friday, el sitio escala automáticamente sin downtime.  
 - Al finalizar el evento, el ASG reduce instancias para ahorrar costos.  
 
+```mermaid
+flowchart TD
+    A[Inicio: Trafico Web en Black Friday] --> B[ALB - Application Load Balancer]
+    B --> C[Instancias EC2 - ASG]
+
+    subgraph Auto Scaling Group - ASG
+        C --> D{CPU > 60%\npor 3 min}
+        D -- Si --> E[Agregar 2 Instancias]
+        D -- No --> F{CPU < 30%\npor 15 min}
+        F -- Si --> G[Quitar 1 Instancia]
+        F -- No --> H[Mantener Instancias]
+    end
+
+    C --> I[Health Check]
+    I --> J{Conexion DB OK}
+    J -- Si --> K[Sitio Disponible]
+    J -- No --> L[Error de Salud - Notificar]
+
+    C --> M[Base de Datos Aurora MySQL]
+    M --> N[Read Replicas]
+
+    K --> O[Fin: Escalado Automatico sin Downtime]
+    G --> P[Fin: Reduccion de Costos post-evento]
+```
+
 ---
 
 ## **Resumen del Día 4**
